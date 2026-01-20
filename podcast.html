@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast - Graphic Designer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .podcast-player-section {
+            padding: 60px 0;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .podcast-player {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .podcast-player h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 30px 0;
+            padding-top: 56.25%;
+            background: black;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .podcast-description {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-top: 30px;
+        }
+
+        .podcast-description h3 {
+            color: #d97706;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .podcast-description p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
+        }
+
+        .episode-list {
+            background: #f9fafb;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .episode-list h3 {
+            color: #d97706;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .episode-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .episode-item:hover {
+            border-left-color: #d97706;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(217, 119, 6, 0.1);
+        }
+
+        .episode-item h4 {
+            color: #d97706;
+            margin-bottom: 8px;
+        }
+
+        .episode-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .episode-item.active {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(245, 158, 11, 0.1));
+            border-left-color: #d97706;
+        }
+
+        .podcast-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .podcast-content {
+                grid-template-columns: 1fr;
+            }
+
+            .podcast-player {
+                padding: 30px;
+            }
+
+            .podcast-player h2 {
+                font-size: 1.5rem;
+            }
+
+            .video-container {
+                margin: 20px 0;
+            }
+
+            .podcast-description {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar sticky">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-text">Design Studio</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">Về Chúng Tôi</a></li>
+                <li><a href="index.html#categories">Danh Mục</a></li>
+                <li><a href="index.html#podcast">Podcast</a></li>
+                <li><a href="index.html#profession">Nghề Nghiệp</a></li>
+                <li><a href="index.html#contact">Liên Hệ</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Podcast Player Section -->
+    <section class="podcast-player-section">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Quay Lại</button>
+            
+            <div class="podcast-content">
+                <div>
+                    <div class="podcast-player">
+                        <h2 id="episodeTitle">Tập Podcast</h2>
+                        
+                        <div class="video-container">
+                            <iframe id="videoPlayer" src="" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                        </div>
+
+                        <div class="podcast-description">
+                            <h3>📝 Mô Tả Tập</h3>
+                            <p id="episodeDescription">Đang tải nội dung...</p>
+                            <button class="back-button" onclick="goBack()">← Quay Lại Trang Chủ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="episode-list">
+                    <h3>📻 Các Tập Khác</h3>
+                    <div id="episodesList"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Design Studio. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html#about">Về Chúng Tôi</a>
+                <a href="index.html#categories">Danh Mục</a>
+                <a href="index.html#podcast">Podcast</a>
+                <a href="index.html#contact">Liên Hệ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const podcastData = {
+            1: {
+                title: 'Bước Vào Thế Giới Graphic Designer',
+                description: `Trong tập đầu tiên của series podcast "Vén Màn Bí Ẩn Đằng Sau Nghề Graphic Designer", chúng ta sẽ khám phá những điều cơ bản nhất về nghề thiết kế đồ họa.
+
+Tập podcast này với chuyên gia Khương Bảo Khánh sẽ giới thiệu:
+• Công việc thực tế của một graphic designer
+• Các lĩnh vực chuyên ngành phổ biến trong thiết kế
+• Yêu cầu kỹ năng cơ bản để bắt đầu sự nghiệp
+• Những sai lầm phổ biến của những người mới bắt đầu
+• Lời khuyên quý báu từ một chuyên gia có kinh nghiệm
+
+Đây là điểm khởi đầu hoàn hảo cho bất kỳ ai quan tâm đến lĩnh vực thiết kế đồ họa!`,
+                videoId: 'dQw4w9WgXcQ' // YouTube video ID
+            },
+            2: {
+                title: 'Kỹ Năng Thiết Kế & Công Cụ Chuyên Dụng',
+                description: `Tập thứ hai sẽ tập trung vào các kỹ năng thiết kế cần thiết và các công cụ chuyên dụng trong ngành.
+
+Nội dung chính:
+• Adobe Photoshop - Chỉnh sửa hình ảnh chuyên nghiệp
+• Adobe Illustrator - Thiết kế vector
+• Adobe InDesign - Bố cục và thiết kế ấn phẩm
+• Figma - Công cụ thiết kế hiện đại
+• After Effects - Tạo hiệu ứng chuyển động
+• Kỹ năng sketch và lên ý tưởng
+• Hiểu về bố cục, màu sắc, và typography
+• Làm việc với feedback từ khách hàng
+
+Chuyên gia Khương Bảo Khánh sẽ chia sẻ cách học các công cụ này hiệu quả và phát triển kỹ năng thiết kế của bạn.`,
+                videoId: 'dQw4w9WgXcQ' // YouTube video ID
+            },
+            3: {
+                title: 'Lộ Trình Sự Nghiệp & Cơ Hội Việc Làm',
+                description: `Tập cuối cùng của series sẽ khám phá các cơ hội việc làm và lộ trình thăng tiến trong ngành thiết kế.
+
+Các chủ đề được thảo luận:
+• Cơ hội việc làm tại các công ty thiết kế và agency
+• Làm việc cho doanh nghiệp và startup
+• Cơ hội freelance và làm việc remote
+• Lộ trình thăng tiến từ Junior đến Senior Designer
+• Con đường thành Art Director hoặc Creative Director
+• Chuyên môn hóa: UI/UX, Motion Design, Brand Strategy
+• Lương tháng và phúc lợi trong ngành
+• Cách xây dựng portfolio ấn tượng
+• Mẹo phỏng vấn thành công
+
+Đây là cơ hội để tìm hiểu rõ hơn về tương lai của sự nghiệp trong thiết kế!`,
+                videoId: 'dQw4w9WgXcQ' // YouTube video ID
+            }
+        };
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function loadPodcast() {
+            const episode = getQueryParam('episode') || '1';
+            const data = podcastData[episode];
+
+            if (data) {
+                document.getElementById('episodeTitle').textContent = data.title;
+                document.getElementById('episodeDescription').textContent = data.description;
+                
+                // Use YouTube embed
+                const videoUrl = `https://www.youtube.com/embed/${data.videoId}`;
+                document.getElementById('videoPlayer').src = videoUrl;
+
+                // Mark current episode as active
+                document.querySelectorAll('.episode-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                const activeItem = document.querySelector(`[data-episode="${episode}"]`);
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
+            }
+
+            // Load episode list
+            loadEpisodesList();
+        }
+
+        function loadEpisodesList() {
+            const episodesList = document.getElementById('episodesList');
+            const currentEpisode = getQueryParam('episode') || '1';
+
+            episodesList.innerHTML = '';
+            for (let i = 1; i <= 3; i++) {
+                const data = podcastData[i];
+                const div = document.createElement('div');
+                div.className = 'episode-item' + (i == currentEpisode ? ' active' : '');
+                div.setAttribute('data-episode', i);
+                div.innerHTML = `
+                    <h4>Tập ${i}</h4>
+                    <p>${data.title}</p>
+                `;
+                div.onclick = () => {
+                    window.location.href = `podcast.html?episode=${i}`;
+                };
+                episodesList.appendChild(div);
+            }
+        }
+
+        function goBack() {
+            window.location.href = 'index.html#podcast';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPodcast);
+    </script>
+</body>
+</html>
